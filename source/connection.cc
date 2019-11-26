@@ -396,6 +396,9 @@ RestClient::Connection::performCurlRequest(const std::string& uri) {
                      this->unixSocketPath.c_str());
   }
 
+  // disable certificate verification of server certs
+  curl_easy_setopt(this->curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+
   res = curl_easy_perform(this->curlHandle);
   if (res != CURLE_OK) {
     switch (res) {
